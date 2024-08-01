@@ -20,6 +20,11 @@ Legends:
 (Calendar):
 
 - Calendar with upcoming games
+    - Model: Game
+        - Opponent
+        - Home/away
+        - League/cup
+        - Date
 
 Profile:
 
