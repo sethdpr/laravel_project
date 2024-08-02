@@ -24,7 +24,7 @@ Legends:
         - Opponent
         - Home/away
         - League/cup
-        - Date
+        - Dates
 
 Profile:
 
