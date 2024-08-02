@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    //latest news   
+                    @foreach($news as $newArticle)
+                        hier komt de detail van een nieuwsartikel <br>
+                    @endforeach 
                 </div>
             </div>
         </div>
