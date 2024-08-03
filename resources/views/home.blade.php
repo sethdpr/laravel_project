@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .creationDate{
+        font-size: 80%;
+        color: gray;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -15,7 +21,10 @@
                     @endif
 
                     @foreach($news as $newArticle)
-                        hier komt de detail van een nieuwsartikel <br>
+                        <h3>{{ $newArticle->title }}</h3>
+                        <p>{{ $newArticle->news }}</p>
+                        <hr>
+                        <p class="creationDate">{{ $newArticle->created_at->format('d/m/Y') }}</p>
                     @endforeach 
                 </div>
             </div>
