@@ -25,6 +25,12 @@
                         <p>{{ $newArticle->news }}</p>
                         <hr>
                         <p class="creationDate">{{ $newArticle->created_at->format('d/m/Y') }}</p>
+                        @if(Auth::user())
+                            @if(Auth::user()->is_admin == true)
+                                <a href="{{ route('news.edit', $newArticle->id) }}">Edit post</a>
+                                Delete link
+                            @endif
+                        @endif        
                     @endforeach 
                 </div>
             </div>

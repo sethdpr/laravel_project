@@ -16,7 +16,7 @@ class NewsController extends Controller
     }
 
     public function store(Request $request){
-        
+            
         $validated = $request->validate([
             'title' => 'required|min:1',
             'news' => 'required|min:1',
@@ -27,6 +27,27 @@ class NewsController extends Controller
         $newArticle->news = $validated['news'];
         $newArticle->save();
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('status', 'Post added');
     }
-}
+        
+    public function edit($id){
+        $newArticle = News::find($id);
+        return view('edit', compact('newArticle'));
+    }
+
+    public function update($id, Request $request){
+        $newArticle = News::find($id);
+    
+        $validated = $request->validate([
+            'title' => 'required|min:1',
+            'news' => 'required|min:1',
+        ]);
+    
+        $newArticle->title = $validated['title'];
+        $newArticle->news = $validated['news'];
+        $newArticle->save();
+    
+        return redirect()->route('home')->with('status', 'Post edited');
+    }
+    
+} 
