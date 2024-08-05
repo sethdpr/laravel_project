@@ -8,8 +8,7 @@ use App\Models\News;
 class NewsController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
-        $this->middleware('check.admin')->only(['create', 'store']);
+        $this->middleware('auth', ['except' => ['index']]);
     }
 
     public function create(){
