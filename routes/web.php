@@ -13,7 +13,21 @@ Route::post('/news', [NewsController::class, 'store'])->name('news.store');
 Route::get('news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
 Route::put('news/{id}', [NewsController::class, 'update'])->name('news.update');
 
+Route::delete('news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+
 Route::get('user/{name}', [UserController::class, 'profile'])->name('profile');
+
+Route::get('/squad', function () {
+    return view('squad');
+})->name('squad');
+
+Route::get('/legends', function () {
+    return view('legends');
+})->name('legends');
+
+Route::get('/calendar', function () {
+    return view('calendar');
+})->name('calendar');
 
 Auth::routes();
 

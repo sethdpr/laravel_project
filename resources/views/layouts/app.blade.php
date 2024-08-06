@@ -20,9 +20,17 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Manchester United
-                </a>
+                <div class="dropdown">
+                    <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Manchester United
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ url('/') }}">Home</a></li>
+                        <li><a class="dropdown-item" href="{{ route('squad') }}">Squad</a></li>
+                        <li><a class="dropdown-item" href="{{ route('legends') }}">Legends</a></li>
+                        <li><a class="dropdown-item" href="{{ route('calendar') }}">Calendar</a></li>
+                    </ul>
+                </div>
 
                 @auth
                     @if(Auth::user()->is_admin)
@@ -35,8 +43,6 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
                 </button>
-
-
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -66,10 +72,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('profile', ['name' => Auth::user()->name]) }}">
+                                    <a class="dropdown-item" href="{{ route('profile', ['name' => Auth::user()->name]) }}">
                                         {{ __('Profile') }}
                                     </a>    
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -90,5 +96,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    @vite(['resources/js/app.js'])
 </body>
 </html>

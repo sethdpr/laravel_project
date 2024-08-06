@@ -50,4 +50,10 @@ class NewsController extends Controller
         return redirect()->route('home')->with('status', 'Post edited');
     }
     
+    public function destroy($id) {
+        $newsArticle = News::findOrFail($id);
+        $newsArticle->delete();
+    
+        return redirect()->route('home')->with('status', 'Post deleted successfully');
+    }
 } 
