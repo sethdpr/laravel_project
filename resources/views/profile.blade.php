@@ -9,7 +9,10 @@
 
                 <div class="card-body">
                 <p>Username: {{ $user->name }}</p>
-                <p>Acount created on: {{ $user->created_at }}</p>
+                <p>Email: {{ $user->email }}</p>
+                <p>Acount created on: {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y') }}</p>
+                <p>Geboortedatum: {{ \Carbon\Carbon::parse($user->geboortedatum)->format('d/m/Y') }}</p>
+
                 </div>
             </div>
         </div>

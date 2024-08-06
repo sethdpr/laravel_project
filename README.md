@@ -29,6 +29,6 @@ Legends:
 Profile:
 
 Name
-(Nationality)
+email
 Account creation date
 Date of birth
