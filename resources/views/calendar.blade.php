@@ -1,4 +1,3 @@
-<!-- resources/views/calendar.blade.php -->
 @extends('layouts.app')
 
 @section('content')
