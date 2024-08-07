@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SquadController;
+use App\Http\Controllers\LegendController;   
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -20,9 +21,7 @@ Route::get('user/{name}', [UserController::class, 'profile'])->name('profile');
 
 Route::get('/squad', [SquadController::class, 'index'])->name('squad');
 
-Route::get('/legends', function () {
-    return view('legends');
-})->name('legends');
+Route::get('/legends', [LegendController::class, 'index'])->name('legends');
 
 Route::get('/calendar', function () {
     return view('calendar');
