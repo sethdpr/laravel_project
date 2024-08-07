@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SquadController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -17,9 +18,7 @@ Route::delete('news/{id}', [NewsController::class, 'destroy'])->name('news.destr
 
 Route::get('user/{name}', [UserController::class, 'profile'])->name('profile');
 
-Route::get('/squad', function () {
-    return view('squad');
-})->name('squad');
+Route::get('/squad', [SquadController::class, 'index'])->name('squad');
 
 Route::get('/legends', function () {
     return view('legends');
