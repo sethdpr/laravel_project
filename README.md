@@ -14,7 +14,6 @@ Squad:
 
 Legends:
 
-- Description of standards to be a club legend
 - (all) Man United legends
 
 (Calendar):
