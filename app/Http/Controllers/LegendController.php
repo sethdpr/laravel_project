@@ -9,7 +9,7 @@ class LegendController extends Controller
 {
     public function index()
     {
-        $legends = Legend::all();
+        $legends = Legend::orderBy('competitive_appearances', 'desc')->get();
         return view('legends', compact('legends'));
     }
 }
