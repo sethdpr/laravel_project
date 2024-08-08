@@ -5,7 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SquadController;
-use App\Http\Controllers\LegendController;   
+use App\Http\Controllers\LegendController;
+use App\Http\Controllers\GameController;   
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -23,9 +24,7 @@ Route::get('/squad', [SquadController::class, 'index'])->name('squad');
 
 Route::get('/legends', [LegendController::class, 'index'])->name('legends');
 
-Route::get('/calendar', function () {
-    return view('calendar');
-})->name('calendar');
+Route::get('/calendar', [GameController::class, 'calendar'])->name('calendar');
 
 Auth::routes();
 
