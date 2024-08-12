@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Player extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'name',
+        'position',
+        'nation',
+        'age',
+        'image_path',
+    ];
 }
