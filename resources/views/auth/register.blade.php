@@ -1,10 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<style>
+    .register-container {
+        margin-top: 50px;
+    }
+
+    .register-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+    }
+
+    .register-card .card-header {
+        background-color: #d32f2f;
+        color: white;
+        font-size: 1.5rem;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+        padding: 15px;
+    }
+
+    .register-card .card-body {
+        padding: 30px;
+    }
+
+    .register-card .btn-primary {
+        background-color: #d32f2f;
+        border-color: #d32f2f;
+        transition: background-color 0.3s ease;
+    }
+
+    .register-card .btn-primary:hover {
+        background-color: #b71c1c;
+        border-color: #b71c1c;
+    }
+</style>
+
+<div class="container register-container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-6">
+            <div class="card register-card">
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
