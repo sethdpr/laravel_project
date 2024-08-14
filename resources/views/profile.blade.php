@@ -44,7 +44,7 @@
                     <p><strong>Username:</strong> {{ $user->name }}</p>
                     <p><strong>Email:</strong> {{ $user->email }}</p>
                     <p><strong>Account created on:</strong> {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y') }}</p>
-                    <p><strong>Date of birth:</strong> {{ \Carbon\Carbon::parse($user->geboortedatum)->format('d/m/Y') }}</p>
+                    <p><strong>Date of birth:</strong> {{ \Carbon\Carbon::parse($user->birthdate)->format('d/m/Y') }}</p>
                 </div>
             </div>
         </div>
