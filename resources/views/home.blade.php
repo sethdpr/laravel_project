@@ -3,141 +3,181 @@
 @section('content')
 <style>
     body {
-        background-color: #f8f9fa; /* Lichte achtergrondkleur voor contrast */
-        font-family: 'Nunito', sans-serif; /* Modern lettertype */
+        background-color: #f8f9fa;
+        font-family: 'Nunito', sans-serif;
     }
 
     .container {
         width: 100%;
         padding: 0 20px;
-        max-width: 1200px; /* Maximale breedte */
-        margin: 0 auto; /* Center de container */
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
     .card-header {
-        background-color: #d32f2f; /* Manchester United rode kleur */
+        background-color: #d32f2f;
         color: white;
         font-weight: bold;
         text-align: center;
     }
 
-    .creationDate {
-        font-size: 80%;
+    .btn-primary {
+        background-color: #d32f2f;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #b71c1c;
+    }
+
+    .list-group-item {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 10px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .list-group-item:hover {
+        background-color: #f1f1f1;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-group-item h5 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #d32f2f;
+    }
+
+    .list-group-item p {
+        margin: 5px 0;
+        color: #333;
+        overflow-wrap: break-word;
+    }
+
+    .list-group-item small {
         color: gray;
+        font-size: 0.9rem;
+    }
+
+    .btn-edit, .btn-delete {
+        background-color: white;
+        color: #333;
+        border: 1px solid #ddd;
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
     }
 
     .btn-edit {
-        background-color: #ffcc00; /* Gele kleur passend bij het tweede logo */
-        color: black;
-        border: none;
-        padding: 0.6rem 1rem;
-        font-size: 1.2rem;
-        line-height: 1.5;
-        border-radius: 0.25rem;
-        text-align: center;
-        display: inline-block;
-        text-decoration: none;
-        cursor: pointer;
+        background-color: #f0f0f0;
     }
 
     .btn-edit:hover {
-        background-color: #ff9900; /* Donkerdere tint geel voor hover */
+        background-color: #e0e0e0;
     }
 
-    .btn-danger {
-        background-color: #d32f2f; /* Manchester United rode kleur */
+    .btn-delete {
+        background-color: #d32f2f;
         color: white;
-        border: none;
-        padding: 0.6rem 1rem;
-        font-size: 1.2rem;
-        line-height: 1.5;
-        border-radius: 0.25rem;
-        text-align: center;
-        display: inline-block;
-        text-decoration: none;
-        cursor: pointer;
+        border-color: #d32f2f;
     }
 
-    .btn-danger:hover {
-        background-color: #b71c1c; /* Donkerdere tint rood voor hover */
-    }
-
-    .article-container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-bottom: 30px;
-        background-color: white;
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 5px;
-        width: 100%;
-    }
-
-    .article-content {
-        width: 100%;
-    }
-
-    .article-content h3 {
-        color: #d32f2f; /* Rode kleur voor titels */
-        font-size: 2rem; /* Grotere titel */
-        margin-bottom: 15px;
-    }
-
-    .article-content p {
-        color: #333;
-        font-size: 1.1rem; /* Grotere tekst */
-        margin-bottom: 15px;
+    .btn-delete:hover {
+        background-color: #b71c1c;
     }
 
     .actions {
         display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        gap: 15px;
-    }
-
-    hr {
-        border: 1px solid #ddd;
-        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
     }
 </style>
+
 <div class="container">
-    <div class="card">
-        <div class="card-header">Home</div>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">Home</div>
 
-        <div class="card-body">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
+                <div class="card-body">
+                    @if(session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-            @foreach($news as $newArticle)
-                <div class="article-container">
-                    <div class="article-content">
-                        <h3>{{ $newArticle->title }}</h3>
-                        <p>{{ $newArticle->news }}</p>
-                        <p class="creationDate">{{ $newArticle->created_at->format('d/m/Y') }}</p>
-                    </div>
+                    @auth
+                        @if(auth()->user()->isAdmin())
+                            <div class="mb-3 text-center">
+                                <a href="{{ route('news.create') }}" class="btn btn-primary">
+                                    Add Post
+                                </a>
+                            </div>
+                        @endif
+                    @endauth
 
-                    @if(Auth::user() && Auth::user()->is_admin)
-                        <div class="actions">
-                            <form action="{{ route('news.edit', $newArticle->id) }}" method="GET">
-                                <button type="submit" class="btn btn-edit">Edit post</button>
-                            </form>
-
-                            <form action="{{ route('news.destroy', $newArticle->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
-                            </form>
+                    @if($news->isEmpty())
+                        <p class="text-center">No posts available.</p>
+                    @else
+                        <div class="list-group">
+                            @foreach($news as $newsArticle)
+                                <div class="list-group-item">
+                                    <div>
+                                        <h5 class="mb-1">{{ $newsArticle->title }}</h5>
+                                        <p class="mb-1">{{ $newsArticle->news }}</p>
+                                        <small>{{ $newsArticle->created_at->format('d-m-Y') }}</small>
+                                    </div>
+                                    @auth
+                                        @if(auth()->user()->isAdmin())
+                                            <div class="actions">
+                                                <a href="{{ route('news.edit', $newsArticle->id) }}" class="btn-edit">
+                                                    Edit
+                                                </a>
+                                                <form action="{{ route('news.destroy', $newsArticle->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn-delete">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                    @endauth
+                                </div>
+                            @endforeach
                         </div>
                     @endif
                 </div>
-                <hr>
-            @endforeach 
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteForms = document.querySelectorAll('.btn-delete');
+
+        deleteForms.forEach(form => {
+            form.addEventListener('click', function (e) {
+                if (!confirm('Are you sure you want to delete this post?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    });
+</script>
 @endsection

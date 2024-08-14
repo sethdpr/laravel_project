@@ -7,53 +7,53 @@ use App\Models\News;
 
 class NewsController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth', ['except' => ['index']]);
+    public function index(){
+        $news = News::latest()->get();
+        return view('home', compact('news'));
+    }
+    
+    public function create()
+    {
+        return view('news.create');
     }
 
-    public function create(){
-        return view('create');
-    }
-
-    public function store(Request $request){
-            
+    public function store(Request $request)
+    {
         $validated = $request->validate([
-            'title' => 'required|min:1',
-            'news' => 'required|min:1',
+            'title' => 'required|string|min:1',
+            'news' => 'required|string|min:1',
         ]);
 
-        $newArticle = new News;
-        $newArticle->title = $validated['title'];
-        $newArticle->news = $validated['news'];
-        $newArticle->save();
+        News::create($validated);
 
         return redirect()->route('home')->with('status', 'Post added');
     }
         
-    public function edit($id){
-        $newArticle = News::find($id);
-        return view('edit', compact('newArticle'));
+    public function edit($id)
+    {
+        $newsArticle = News::findOrFail($id);
+        return view('news.edit', compact('newsArticle'));
     }
 
-    public function update($id, Request $request){
-        $newArticle = News::find($id);
-    
+    public function update($id, Request $request)
+    {
+        $newsArticle = News::findOrFail($id);
+
         $validated = $request->validate([
-            'title' => 'required|min:1',
-            'news' => 'required|min:1',
+            'title' => 'required|string|min:1',
+            'news' => 'required|string|min:1',
         ]);
-    
-        $newArticle->title = $validated['title'];
-        $newArticle->news = $validated['news'];
-        $newArticle->save();
-    
-        return redirect()->route('home')->with('status', 'Post edited');
+
+        $newsArticle->update($validated);
+
+        return redirect()->route('home')->with('status', 'Post updated');
     }
     
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $newsArticle = News::findOrFail($id);
         $newsArticle->delete();
     
         return redirect()->route('home')->with('status', 'Post deleted successfully');
     }
-} 
+}

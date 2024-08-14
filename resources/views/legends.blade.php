@@ -2,28 +2,24 @@
 
 @section('content')
 <style>
-    /* Algemeen container stijl */
     .legends-section {
         margin-bottom: 30px;
     }
 
-    /* Titels voor de sectie */
     .legends-section h2 {
         font-size: 1.5rem;
-        color: #d32f2f; /* Rode kleur voor titels */
-        border-bottom: 2px solid #d32f2f; /* Rode lijn onder de titel */
+        color: #d32f2f;
+        border-bottom: 2px solid #d32f2f;
         padding-bottom: 5px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
-    /* Container voor legende vakjes */
     .legend-list {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
     }
 
-    /* Individuele legende vakjes */
     .legend-card {
         position: relative;
         width: 100%;
@@ -42,7 +38,6 @@
         transform: translateY(-5px);
     }
 
-    /* Legende naam bovenop de achtergrondafbeelding */
     .legend-card .legend-name {
         position: absolute;
         bottom: 10px;
@@ -52,14 +47,13 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 
-    /* Rode overlay met details bij hover */
     .legend-card .legend-details {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(211, 47, 47, 0.9); /* Rode overlay kleur */
+        background-color: rgba(211, 47, 47, 0.9);
         color: white;
         display: flex;
         flex-direction: column;
@@ -75,12 +69,66 @@
     .legend-card:hover .legend-details {
         opacity: 1;
     }
+
+    .btn-container {
+        display: flex;
+        gap: 10px;
+        margin-top: -10px;
+    }
+
+    .btn {
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-add {
+        background-color: #d32f2f;
+        border-color: #d32f2f;
+        color: white;
+        margin-bottom: 20px;
+    }
+    .btn-add:hover {
+        background-color: #b71c1c;
+        border-color: #d32f2f;
+        color: white;
+    }
+
+    .btn-edit {
+        background-color: white;
+        color: black;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .btn-edit:hover {
+        background-color: #f0f0f0;
+        color: black;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: #fff;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .btn-delete:hover {
+        background-color: #c82333;
+        border-color: #c82333;
+    }
 </style>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <!-- Legends Section -->
+            @if(Auth::check() && Auth::user()->isAdmin())
+                <div class="btn-container">
+                    <a href="{{ route('legends.create') }}" class="btn btn-add">
+                        Add Legend
+                    </a>
+                </div>
+            @endif
+            
             <div class="legends-section">
                 <h2>Legends</h2>
                 <div class="legend-list">
@@ -92,6 +140,20 @@
                                 <p>Nationality: {{ $legend->nation }}</p>
                                 <p>Age: {{ $legend->age }}</p>
                                 <p>Competitive Appearances: {{ $legend->competitive_appearances }}</p>
+                                <div class="btn-container">
+                                    @if(Auth::check() && Auth::user()->isAdmin())
+                                        <a href="{{ route('legends.edit', $legend->id) }}" class="btn btn-edit">
+                                            Edit
+                                        </a>
+                                        <form action="{{ route('legends.destroy', $legend->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this legend?');">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -101,4 +163,3 @@
     </div>
 </div>
 @endsection
-

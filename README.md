@@ -14,9 +14,9 @@ Squad:
 
 Legends:
 
-- (all) Man United legends
+- Man United legends
 
-(Calendar):
+Calendar:
 
 - Calendar with upcoming games
     - Model: Game

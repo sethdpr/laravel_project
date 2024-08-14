@@ -10,7 +10,7 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
-        border: 2px solid #d32f2f; /* Rode rand */
+        border: 2px solid #d32f2f;
     }
 
     .verify-card .card-header {
@@ -28,7 +28,7 @@
     }
 
     .verify-card .btn-link {
-        color: #d32f2f; /* Rode kleur voor de link */
+        color: #d32f2f;
         font-weight: bold;
         text-decoration: underline;
     }
@@ -36,8 +36,8 @@
     .verify-card .alert-success {
         font-size: 1rem;
         margin-bottom: 20px;
-        color: #388e3c; /* Groen voor success message */
-        border-left: 5px solid #388e3c; /* Groen accent op de linkerkant */
+        color: #388e3c;
+        border-left: 5px solid #388e3c;
         background-color: #e8f5e9;
         padding: 10px;
     }

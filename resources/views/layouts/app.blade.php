@@ -12,52 +12,44 @@
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
-        /* Verander achtergrondkleur naar rood */
         .navbar {
-            background-color: #d32f2f !important; /* Rode kleur */
+            background-color: #d32f2f !important;
         }
 
-        /* Zorg ervoor dat de tekstkleur wit is */
         .navbar .navbar-brand,
         .navbar .nav-link,
         .navbar .dropdown-item {
             color: white !important;
         }
 
-        /* Verander tekstkleur bij hover */
         .navbar .nav-link:hover,
         .navbar .dropdown-item:hover {
-            color: #ffeb3b !important; /* Gele kleur bij hover */
+            color: #ffeb3b !important;
         }
 
-        /* Verwijder de pijl op de dropdown-toggle */
         .dropdown-toggle::after {
             display: none !important;
         }
 
-        /* Style voor logo */
         .navbar-brand img {
-            height: 30px; /* Pas de hoogte aan indien nodig */
-            width: auto; /* Zorg ervoor dat de breedte automatisch wordt aangepast */
-            margin-right: 10px; /* Ruimte tussen het logo en de tekst */
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
         }
 
-        /* Dropdown menu styling */
         .dropdown-menu {
-            position: absolute !important; /* Zorg ervoor dat het menu absoluut gepositioneerd is */
-            top: 100%; /* Positioneer het menu direct onder de knop */
+            position: absolute !important;
+            top: 100%;
             left: 0;
-            z-index: 1050; /* Zorg ervoor dat het menu boven andere elementen wordt weergegeven */
-            background-color: #d32f2f; /* Achtergrondkleur van het dropdown-menu */
-            min-width: 160px; /* Zorg ervoor dat het menu voldoende breed is */
+            z-index: 1050;
+            background-color: #d32f2f;
+            min-width: 160px;
         }
 
-        /* Verander achtergrondkleur van dropdown items bij hover */
         .dropdown-menu .dropdown-item:hover {
-            background-color: red; /* Gele kleur bij hover */
+            background-color: red;
         }
 
-        /* Zorg ervoor dat de dropdown-menu in het midden van de naam staat */
         .dropdown-menu-end {
             right: 0;
             left: auto;
@@ -86,7 +78,6 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
