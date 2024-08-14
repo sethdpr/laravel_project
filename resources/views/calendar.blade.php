@@ -106,7 +106,11 @@
                                     <th>Home/Away</th>
                                     <th>League/Cup</th>
                                     <th>Date</th>
-                                    <th>Actions</th>
+                                    @auth
+                                        @if(Auth::user()->isAdmin())
+                                            <th>Actions</th>
+                                        @endif
+                                    @endauth
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,30 +120,38 @@
                                         <td>{{ $game['home/away'] }}</td>
                                         <td>{{ $game['league/cup'] }}</td>
                                         <td>{{ \Carbon\Carbon::parse($game->date)->format('d-m-Y') }}</td>
-                                        <td>
-                                            <a href="{{ route('games.edit', $game->id) }}" class="btn btn-edit">
-                                                Edit
-                                            </a>
+                                        @auth
+                                            @if(Auth::user()->isAdmin())
+                                                <td>
+                                                    <a href="{{ route('games.edit', $game->id) }}" class="btn btn-edit">
+                                                        Edit
+                                                    </a>
 
-                                            <form action="{{ route('games.destroy', $game->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this game?');">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </td>
+                                                    <form action="{{ route('games.destroy', $game->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this game?');">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            @endif
+                                        @endauth
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     @endif
 
-                    <div class="text-center">
-                        <a href="{{ route('games.create') }}" class="btn btn-add">
-                            Add Game
-                        </a>
-                    </div>
+                    @auth
+                        @if(Auth::user()->isAdmin())
+                            <div class="text-center">
+                                <a href="{{ route('games.create') }}" class="btn btn-add">
+                                    Add Game
+                                </a>
+                            </div>
+                        @endif
+                    @endauth
 
                 </div>
             </div>
