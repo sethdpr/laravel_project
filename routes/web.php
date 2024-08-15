@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SquadController;
 use App\Http\Controllers\LegendController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\FaqController;
 
 Route::get('/', [NewsController::class, 'index'])->name('home');
 Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
@@ -24,5 +25,12 @@ Route::resource('legends', LegendController::class);
 
 Route::get('/views/calendar', [GameController::class, 'index'])->name('calendar');
 Route::resource('games', GameController::class);
+
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create');
+Route::post('/faq', [FaqController::class, 'store'])->name('faq.store');
+Route::get('/faq/{id}/edit', [FaqController::class, 'edit'])->name('faq.edit');
+Route::put('/faq/{id}', [FaqController::class, 'update'])->name('faq.update');
+Route::delete('/faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
 Auth::routes();
