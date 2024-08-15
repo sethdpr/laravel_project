@@ -166,18 +166,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const deleteForms = document.querySelectorAll('.btn-delete');
-
-        deleteForms.forEach(form => {
-            form.addEventListener('click', function (e) {
-                if (!confirm('Are you sure you want to delete this post?')) {
-                    e.preventDefault();
-                }
-            });
-        });
-    });
-</script>
 @endsection
