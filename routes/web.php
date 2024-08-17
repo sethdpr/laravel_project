@@ -7,6 +7,7 @@ use App\Http\Controllers\SquadController;
 use App\Http\Controllers\LegendController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', [NewsController::class, 'index'])->name('home');
 Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
@@ -32,5 +33,11 @@ Route::post('/faq', [FaqController::class, 'store'])->name('faq.store');
 Route::get('/faq/{id}/edit', [FaqController::class, 'edit'])->name('faq.edit');
 Route::put('/faq/{id}', [FaqController::class, 'update'])->name('faq.update');
 Route::delete('/faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 Auth::routes();
