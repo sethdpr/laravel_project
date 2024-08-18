@@ -31,6 +31,3 @@ Name
 email
 Account creation date
 Date of birth
-
-
-Link to GitHub: https://github.com/sethdpr/laravel_project.git

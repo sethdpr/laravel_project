@@ -72,6 +72,7 @@
                         <li><a class="dropdown-item" href="{{ route('calendar') }}">Calendar</a></li>
                         <li><a class="dropdown-item" href="{{ route('faq') }}">FAQ</a></li>
                         <li><a class="dropdown-item" href="{{ route('contact') }}">Contact us</a></li>
+                        <li><a class="dropdown-item" href="{{ route('about') }}">About</a></li>
                     </ul>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
